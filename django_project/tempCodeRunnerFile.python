@@ -1,0 +1,44 @@
+import tkinter as tk
+
+def add_item():
+    item = item_entry.get()
+    quantity = quantity_entry.get()
+
+    if item and quantity:
+        item_list.insert(tk.END, f"{item} - {quantity}")
+        item_entry.delete(0, tk.END)
+        quantity_entry.delete(0, tk.END)
+
+def remove_item():
+    selected_index = item_list.curselection()
+    if selected_index:
+        item_list.delete(selected_index)
+
+root = tk.Tk()
+root.title("Procurement List")
+
+# Item Entry
+item_label = tk.Label(root, text="Item:")
+item_label.grid(row=0, column=0, padx=8, pady=8, sticky="e")
+item_entry = tk.Entry(root)
+item_entry.grid(row=0, column=1, padx=8, pady=8)
+
+# Quantity Entry
+quantity_label = tk.Label(root, text="Quantity:")
+quantity_label.grid(row=1, column=0, padx=5, pady=5, sticky="e")
+quantity_entry = tk.Entry(root)
+quantity_entry.grid(row=1, column=1, padx=5, pady=5)
+
+# Add Button
+add_button = tk.Button(root, text="Add Item", command=add_item)
+add_button.grid(row=2, column=0, columnspan=2, padx=5, pady=5)
+
+# Item List
+item_list = tk.Listbox(root)
+item_list.grid(row=3, column=0, columnspan=2, padx=5, pady=5, sticky="nsew")
+
+# Remove Button
+remove_button = tk.Button(root, text="Remove Item", command=remove_item)
+remove_button.grid(row=4, column=0, columnspan=2, padx=5, pady=5)
+
+root.mainloop()
